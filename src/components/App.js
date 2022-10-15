@@ -9,12 +9,15 @@ import data from "../../data";
 const App = () => {
   const [allProducts, setAllProducts] = useState(data);
   const [filetredProducts, setfilteredProducts] = useState(data);
+  const [cart, setCart] = useState([]);
   return (
     <Appcontext.Provider
       value={{
         allProducts: allProducts,
         filetredProducts: filetredProducts,
         setfilteredProducts: setfilteredProducts,
+        cart: cart,
+        setCart: setCart,
       }}
     >
       <div id="main">
