@@ -1,7 +1,12 @@
 import React, { useContext } from "react";
+import { useState } from "react";
 import AppContext from "../context/myntraContext";
+import Modal from "../components/Modal";
 function Product() {
   const { filetredProducts } = useContext(AppContext);
+  const [showModal, setShowModal] = useState(false);
+  const [photosGallery, setPhotosGallery] = useState({});
+
   return (
     <div
       style={{
@@ -12,10 +17,26 @@ function Product() {
         gap: "2rem",
       }}
     >
+      {showModal && (
+        <Modal
+          productImages={photosGallery}
+          onClose={() => {
+            setShowModal(false);
+          }}
+        />
+      )}
       {filetredProducts.map((product) => {
         return (
-          <div className="indiv-tile-holder" onCilck={() => {}}>
-            <img src={product.otherImages[0]} width="200" height="200" />
+          <div className="indiv-tile-holder">
+            <img
+              src={product.otherImages[0]}
+              width="200"
+              height="200"
+              onClick={() => {
+                setShowModal(true);
+                setPhotosGallery(product);
+              }}
+            />
             <div>{product.name}</div>
             <div>
               <i>{product.description}</i>
